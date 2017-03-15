@@ -28,9 +28,9 @@ GN_CONTENTS = \
 "import(\"//build/config/sysroot.gni\")" \
 "import(\"//build/toolchain/gcc_toolchain.gni\")" \
 "gcc_toolchain(\"host\") {" \
-"  cc = \"$$which($$QMAKE_CC)\" " \
-"  cxx = \"$$which($$QMAKE_CXX)\" " \
-"  ld = \"$$which($$QMAKE_LINK)\" " \
+"  cc = \"$$which(gcc)\" " \
+"  cxx = \"$$which(g++)\" " \
+"  ld = \"$$which(g++)\" " \
 "  ar = \"$$which(ar)\" " \
 "  nm = \"$$which(nm)\" " \
 "  toolchain_args = { " \
@@ -41,9 +41,9 @@ GN_CONTENTS = \
 "  } " \
 "}" \
 "gcc_toolchain(\"v8_snapshot\") {" \
-"  cc = \"$$which($$QMAKE_CC)\" " \
-"  cxx = \"$$which($$QMAKE_CXX)\" " \
-"  ld = \"$$which($$QMAKE_LINK)\" " \
+"  cc = \"$$which(gcc)\" " \
+"  cxx = \"$$which(g++)\" " \
+"  ld = \"$$which(g++)\" " \
 "  ar = \"$$which(ar)\" " \
 "  nm = \"$$which(nm)\" " \
 "  toolchain_args = { " \
