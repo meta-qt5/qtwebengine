@@ -4,7 +4,7 @@ TEMPLATE = aux
 # Pick up the host toolchain
 option(host_build)
 
-GN_HOST_CPU = $$gnArch($$QT_ARCH)
+GN_HOST_CPU = $$gnArch($$QMAKE_HOST.arch)
 !isEmpty(QT_TARGET_ARCH): GN_TARGET_CPU = $$gnArch($$QT_TARGET_ARCH)
 else: GN_TARGET_CPU = $$GN_HOST_CPU
 GN_OS = $$gnOS()
@@ -24,6 +24,7 @@ contains(GN_TARGET_CPU, "arm")|contains(GN_TARGET_CPU, "mipsel")|contains(GN_TAR
 }
 
 GN_HOST_EXTRA_CPPFLAGS = $$(GN_HOST_TOOLCHAIN_EXTRA_CPPFLAGS)
+GN_HOST_EXTRA_LDFLAGS = $$(GN_HOST_TOOLCHAIN_EXTRA_LDFLAGS)
 
 # We always use the gcc_toolchain, because clang_toolchain is just
 # a broken wrapper around it for Google's custom clang binaries.
@@ -31,12 +32,13 @@ GN_CONTENTS = \
 "import(\"//build/config/sysroot.gni\")" \
 "import(\"//build/toolchain/gcc_toolchain.gni\")" \
 "gcc_toolchain(\"host\") {" \
-"  cc = \"$$which($$QMAKE_CC)\" " \
-"  cxx = \"$$which($$QMAKE_CXX)\" " \
-"  ld = \"$$which($$QMAKE_LINK)\" " \
+"  cc = \"$$which($$CC_host)\" " \
+"  cxx = \"$$which($$CXX_host)\" " \
+"  ld = \"$$which($$CXX_host)\" " \
 "  ar = \"$$which(ar)\" " \
 "  nm = \"$$which(nm)\" " \
 "  extra_cppflags = \"$$GN_HOST_EXTRA_CPPFLAGS\" " \
+"  extra_ldflags = \"$$GN_HOST_EXTRA_LDFLAGS\" " \
 "  toolchain_args = { " \
 "    current_os = \"$$GN_OS\" " \
 "    current_cpu = \"$$GN_HOST_CPU\" " \
@@ -45,9 +47,9 @@ GN_CONTENTS = \
 "  } " \
 "}" \
 "gcc_toolchain(\"v8_snapshot\") {" \
-"  cc = \"$$which($$QMAKE_CC)\" " \
-"  cxx = \"$$which($$QMAKE_CXX)\" " \
-"  ld = \"$$which($$QMAKE_LINK)\" " \
+"  cc = \"$$which($$CC_host)\" " \
+"  cxx = \"$$which($$CXX_host)\" " \
+"  ld = \"$$which($$CXX_host)\" " \
 "  ar = \"$$which(ar)\" " \
 "  nm = \"$$which(nm)\" " \
 "  toolchain_args = { " \
