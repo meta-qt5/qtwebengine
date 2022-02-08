@@ -399,7 +399,6 @@
                          && features.webengine-gperf
                          && features.webengine-bison
                          && features.webengine-flex
-                         && features.webengine-python2
                          && (!config.sanitizer || features.webengine-sanitizer)
                          && (!config.linux || features.pkg-config)
                          && (!config.linux || features.webengine-host-pkg-config)
