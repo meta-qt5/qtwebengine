@@ -20,7 +20,8 @@ build_pass|!debug_and_release {
 
             gn_gen_args = --no-last-commit-position --out-path $$out_path \
                           --cc \"$$which($$CC_host)\" --cxx \"$$which($$CXX_host)\" \
-                          --ld \"$$which($$CXX_host)\" --ar \"$$which(ar)\"
+                          --ld \"$$which($$CXX_host)\" --ar \"$$which(ar)\" \
+                          --no-static-libstdc++
             !isEmpty(QMAKE_AR): gn_gen_args += --ar \"$$which($$first(QMAKE_AR))\"
 
             msvc:!clang_cl: gn_gen_args += --use-lto
