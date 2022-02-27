@@ -20,8 +20,7 @@ build_pass|!debug_and_release {
 
             gn_gen_args = --no-last-commit-position --out-path $$out_path \
                           --cc \"$$which($$CC_host)\" --cxx \"$$which($$CXX_host)\" \
-                          --ld \"$$which($$CXX_host)\" --ar \"$$which(ar)\" \
-                          --no-static-libstdc++
+                          --ld \"$$which($$CXX_host) -stdlib=libc++ -rtlib=libgcc -unwindlib=libgcc $$(GN_HOST_TOOLCHAIN_EXTRA_LDFLAGS)\" --ar \"$$which(ar)\"
 
             msvc:!clang_cl: gn_gen_args += --use-lto
 
